@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MKT 708 — Student Walkthroughs</title>
+<style>
+  :root{
+    --navy:#0d2240; --blue:#1b4f8a; --accent:#c8a24b; --bg:#f5f6f8;
+    --card:#ffffff; --ink:#1c2530; --muted:#5a6573; --line:#e3e7ec;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  header{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:48px 24px 56px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  header .wrap{padding:0}
+  .eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:var(--accent);font-weight:700}
+  header h1{margin:8px 0 6px;font-size:34px;line-height:1.2}
+  header p{margin:0;color:#c9d6e8;max-width:680px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:-32px auto 40px;max-width:1000px;padding:0 24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;text-decoration:none;color:inherit;box-shadow:0 6px 20px rgba(13,34,64,.06);transition:transform .15s,box-shadow .15s;display:block}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(13,34,64,.12)}
+  .badge{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.05em}
+  .card h3{margin:14px 0 6px;font-size:19px}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  .card .due{margin-top:12px;font-size:13px;color:var(--blue);font-weight:600}
+  .note{max-width:1000px;margin:0 auto 60px;padding:0 24px;color:var(--muted);font-size:14px}
+  footer{background:var(--navy);color:#aebfd4;font-size:13px;padding:24px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Southern Connecticut State University · MSBA</div>
+    <h1>MKT 708 — Customer Data Analytics</h1>
+    <p>Step-by-step student walkthroughs for every week of the course. Each page guides you from a blank screen to a finished, submittable deliverable. Summer B 2026 · Dr. Junhong (Emma) Wang.</p>
+  </div>
+</header>
+
+<div class="grid">
+  <a class="card" href="week0_setup.html">
+    <span class="badge" style="background:var(--accent);color:#2a2310">START HERE</span>
+    <h3>Week 0 · Setup</h3>
+    <p>Install Python (3.12 or newer), the analytics libraries, Jupyter, and download the dataset.</p>
+    <div class="due">Do this before July 7 &nbsp;·&nbsp; + Troubleshooting &amp; PDF-export help inside</div>
+  </a>
+  <a class="card" href="week1.html">
+    <span class="badge">Week 1</span>
+    <h3>Foundations + First Memos</h3>
+    <p>Background Memo and Dataset Application Memo. Load the data and report its shape.</p>
+    <div class="due">Due Jul 10 &amp; Jul 13</div>
+  </a>
+  <a class="card" href="week2.html">
+    <span class="badge">Week 2</span>
+    <h3>Cleaning &amp; Exploration (AA1)</h3>
+    <p>Clean the dataset, document every decision, build a customer summary + visualizations.</p>
+    <div class="due">Due Jul 20</div>
+  </a>
+  <a class="card" href="week3.html">
+    <span class="badge">Week 3</span>
+    <h3>RFM Segmentation (AA2)</h3>
+    <p>Compute Recency, Frequency, Monetary scores; name segments; profile and interpret them.</p>
+    <div class="due">Due Jul 27</div>
+  </a>
+  <a class="card" href="week4.html">
+    <span class="badge">Week 4</span>
+    <h3>CLV, Retention &amp; Churn (AA3)</h3>
+    <p>Project CLV, build a cohort matrix, flag churn, plot the priority matrix. Plus the Proposal.</p>
+    <div class="due">Due Aug 1 &amp; Aug 3</div>
+  </a>
+  <a class="card" href="week5.html">
+    <span class="badge">Week 5</span>
+    <h3>Final Report &amp; Slides</h3>
+    <p>Synthesize everything into the final PDF report, executive slides, and optional reflection.</p>
+    <div class="due">Due Aug 10</div>
+  </a>
+</div>
+
+<div class="note">
+  <strong>How each week page works:</strong> the <b>official assignment brief</b> is at the top — what to do, the deliverable, and how it's graded. Below it, the <b>Step-by-Step Walkthrough</b> expands to show the full copy-paste code; collapse it once you're comfortable. Every page ends with a checklist and the exact file name to submit on Blackboard.
+  <br><br>
+  <strong>Setup help:</strong> <a href="week0_setup.html">Install Python &amp; Jupyter</a> &nbsp;·&nbsp; <a href="troubleshooting.html">Troubleshooting</a> &nbsp;·&nbsp; <a href="how_to_export_pdf.html">Export your notebook to PDF</a>.
+  <br><br>
+  A reminder from the syllabus: you may use AI to debug code, but the analytical interpretation and written synthesis must be your own, and any AI use must be disclosed.
+</div>
+
+<footer>MKT 708 · Customer Data Analytics · Summer B 2026 · For enrolled students only.</footer>
+</body>
+</html>

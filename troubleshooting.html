@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python &amp; Jupyter Troubleshooting | MKT 708</title>
+<style>
+  :root{--navy:#0d2240;--blue:#1b4f8a;--accent:#c8a24b;--bg:#f5f6f8;--card:#fff;--ink:#1c2530;--muted:#5a6573;--line:#e3e7ec;--code:#0f1b2d;--ok:#1f7a4d;--warn:#b4601a}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  header{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:40px 0 46px}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .top{font-size:13px}.top a{color:#c9d6e8;text-decoration:none}
+  .eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:700;margin-top:18px}
+  header h1{margin:6px 0 8px;font-size:29px}header p{margin:0;color:#c9d6e8}
+  main{max-width:880px;margin:0 auto;padding:8px 24px 70px}
+  h2{font-size:18px;color:var(--navy);margin:30px 0 6px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .issue{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:10px;padding:14px 18px;margin:14px 0;box-shadow:0 3px 12px rgba(13,34,64,.05)}
+  .issue h3{margin:0 0 8px;font-size:16px;color:var(--navy)}
+  .row{margin:6px 0;font-size:14.5px}
+  .lab{display:inline-block;min-width:80px;font-weight:700;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em;vertical-align:top}
+  .sym{color:var(--warn)}
+  .fix{color:var(--ok)}
+  code{background:#e8edf3;padding:1px 6px;border-radius:5px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px}
+  pre{background:var(--code);color:#e8eef6;border-radius:8px;padding:10px 13px;overflow:auto;font-size:12.5px;font-family:"SF Mono",Menlo,Consolas,monospace;margin:6px 0}
+  .intro{background:#eef4fb;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14.5px}
+  .rule{background:#ecf7f1;border-left:4px solid var(--ok);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14.5px}
+  .nav{display:flex;justify-content:space-between;margin-top:28px;font-size:15px}.nav a{text-decoration:none;color:var(--blue);font-weight:600}
+  footer{background:var(--navy);color:#aebfd4;font-size:13px;padding:22px;text-align:center}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="top"><a href="index.html">← All weeks</a></div>
+  <div class="eyebrow">Setup survival guide</div>
+  <h1>Python &amp; Jupyter Troubleshooting</h1>
+  <p>The real problems students hit when installing Python and starting Jupyter — with the fix for each. Skim the headings to find your symptom.</p>
+</div></header>
+
+<main>
+  <div class="rule"><b>Two rules that prevent most of these:</b> (1) On Windows, if a plain command like <code>python</code> or <code>jupyter</code> isn't recognized, put <code>py -m</code> in front of it (e.g. <code>py -m pip …</code>, <code>py -m jupyter notebook</code>) — the <code>py</code> launcher sidesteps PATH problems. (2) Keep the black Command Prompt window <b>open</b> the whole time you use Jupyter — it's the engine.</div>
+
+  <h2>A. Running commands in the right place</h2>
+
+  <div class="issue">
+    <h3>1. Pip commands do nothing; I just see <code>...</code></h3>
+    <div class="row"><span class="lab sym">Symptom</span> You typed <code>pip install …</code> and the screen shows <code>&gt;&gt;&gt;</code> then <code>...</code> lines, and nothing installs.</div>
+    <div class="row"><span class="lab">Cause</span> You're <i>inside</i> the Python interactive prompt (<code>&gt;&gt;&gt;</code>), not the Command Prompt. Python is treating your commands as code.</div>
+    <div class="row"><span class="lab fix">Fix</span> Type <code>exit()</code> and press Enter to leave Python. Then open <b>Command Prompt</b> (Start → type <code>cmd</code>). Its prompt looks like <code>C:\Users\you&gt;</code> — run pip commands there.</div>
+  </div>
+
+  <h2>B. “Not recognized” / command not found</h2>
+
+  <div class="issue">
+    <h3>2. <code>python</code> is not recognized (or it opens the Microsoft Store)</h3>
+    <div class="row"><span class="lab sym">Symptom</span> <code>'python' is not recognized…</code> or a Store page opens.</div>
+    <div class="row"><span class="lab">Cause</span> “Add python.exe to PATH” wasn't checked during install, and a Windows Store alias is intercepting the name.</div>
+    <div class="row"><span class="lab fix">Fix</span> Use <code>py</code> instead — it always works: <code>py --version</code>, <code>py -m pip install …</code>.<br>Permanent fix: <b>Settings → Apps → Advanced app settings → App execution aliases</b> → turn <b>off</b> <code>python.exe</code> and <code>python3.exe</code>; or re-run the installer and check “Add Python to PATH.”</div>
+  </div>
+
+  <div class="issue">
+    <h3>3. <code>jupyter</code> is not recognized</h3>
+    <div class="row"><span class="lab sym">Symptom</span> <code>'jupyter' is not recognized…</code></div>
+    <div class="row"><span class="lab">Cause</span> Same PATH issue — the Scripts folder isn't on PATH.</div>
+    <div class="row"><span class="lab fix">Fix</span> Launch it through Python: <pre>py -m jupyter notebook</pre>If that errors, try <code>py -m notebook</code>. On Windows, whenever a command isn't recognized, prefixing it with <code>py -m</code> is the reliable fallback — it sidesteps PATH issues.</div>
+  </div>
+
+  <h2>C. Jupyter server problems</h2>
+
+  <div class="issue">
+    <h3>4. “File Save Error … Failed to fetch”, cells freeze, no <code>[*]</code></h3>
+    <div class="row"><span class="lab sym">Symptom</span> A save-error popup appears and the notebook stops responding to clicks.</div>
+    <div class="row"><span class="lab">Cause</span> The Command Prompt window running Jupyter was closed (or lost connection). That window <i>is</i> the server — close it and Jupyter dies.</div>
+    <div class="row"><span class="lab fix">Fix</span> Keep the cmd window open (minimize it). To recover: open cmd, <code>cd</code> to your folder, run <code>py -m jupyter notebook</code> again, and reopen your notebook (your code is saved).</div>
+  </div>
+
+  <div class="issue">
+    <h3>5. Jupyter opens in the wrong folder</h3>
+    <div class="row"><span class="lab sym">Symptom</span> The Jupyter file list shows Documents, Downloads, etc. — not your course files.</div>
+    <div class="row"><span class="lab">Cause</span> It launched from your home directory.</div>
+    <div class="row"><span class="lab fix">Fix</span> Move into your course folder first, then launch. Quote the path if it has spaces:<pre>cd "C:\Users\you\...\MKT 708"
+py -m jupyter notebook</pre></div>
+  </div>
+
+  <h2>D. Notebook behaving oddly</h2>
+
+  <div class="issue">
+    <h3>6. I changed the code but the result didn't change</h3>
+    <div class="row"><span class="lab">Cause</span> In Jupyter, editing a cell does nothing until you <b>re-run</b> it.</div>
+    <div class="row"><span class="lab fix">Fix</span> Re-run the cell with <b>Shift+Enter</b>. When things feel out of sync, use <b>Kernel → Restart Kernel and Run All Cells</b> to run everything cleanly top-to-bottom.</div>
+  </div>
+
+  <div class="issue">
+    <h3>7. What do <code>[ ]</code>, <code>[*]</code>, and <code>[3]</code> mean?</h3>
+    <div class="row"><span class="lab fix">Meaning</span> <code>[ ]</code> = not run yet · <code>[*]</code> = running now, please wait · <code>[3]</code> = finished (the number is the run order). Reading a big file can sit at <code>[*]</code> for a while — that's normal.</div>
+  </div>
+
+  <div class="issue">
+    <h3>8. <code>ModuleNotFoundError: No module named 'panda'</code> or <code>NameError: name 'pd' is not defined</code></h3>
+    <div class="row"><span class="lab">Cause</span> A typo — <code>import panda</code> instead of <code>import pandas</code> (it needs the “s”) — or cells were run out of order, so the import never succeeded and later cells can't find <code>pd</code>.</div>
+    <div class="row"><span class="lab fix">Fix</span> Correct it to <code>import pandas as pd</code>, then run cells top to bottom (<b>Restart Kernel and Run All Cells</b>).</div>
+  </div>
+
+  <h2>E. The dataset file</h2>
+
+  <div class="issue">
+    <h3>9. Data shows 14 columns / “Unnamed: 8–13” / only 1,048,575 rows</h3>
+    <div class="row"><span class="lab sym">Symptom</span> Extra blank columns appear, or the row count is 1,048,575 instead of 1,067,371.</div>
+    <div class="row"><span class="lab">Cause</span> The CSV was opened and re-saved in Excel. Excel truncates at 1,048,575 rows and adds phantom empty columns.</div>
+    <div class="row"><span class="lab fix">Fix</span> Re-download the clean <code>online_retail_II.csv</code> from Blackboard (Week 1 folder) and <b>do not open it in Excel</b>. Quick code fallback to read only the 8 real columns:<pre>df = pd.read_csv("online_retail_II.csv", usecols=range(8))</pre></div>
+  </div>
+
+  <div class="issue">
+    <h3>10. <code>FileNotFoundError: 'online_retail_II.csv'</code> — but I downloaded the data</h3>
+    <div class="row"><span class="lab">Cause</span> Python looks for the file in the folder your notebook is running from. The CSV is somewhere else (e.g. still in Downloads), or the name doesn't match exactly — like <code>online_retail_II (1).csv</code>, or a different capitalization.</div>
+    <div class="row"><span class="lab fix">Fix</span> Move <code>online_retail_II.csv</code> into the same <code>MKT708</code> folder as your notebook, and make sure the name in your code matches the file <i>exactly</i>. To see where the notebook is looking and what files it can see there:<pre>import os
+print(os.getcwd())     # the folder Python is reading from
+print(os.listdir())    # the files it can see there</pre>If the CSV isn't in that list, move it there (or pass the full path to <code>read_csv</code>).</div>
+  </div>
+
+  <div class="issue">
+    <h3>11. The <code>.ipynb</code> file won't open when I double-click it</h3>
+    <div class="row"><span class="lab sym">Symptom</span> Double-clicking does nothing, or Windows shows a generic/PDF-looking icon.</div>
+    <div class="row"><span class="lab">Cause</span> Windows has no program associated with <code>.ipynb</code> files — the file is fine.</div>
+    <div class="row"><span class="lab fix">Fix</span> Open it through Jupyter: launch Jupyter, then click the file in the list. To view it without Jupyter, export it to HTML or PDF (see the “How to Export to PDF” guide).</div>
+  </div>
+
+  <div class="intro" style="margin-top:26px">Still stuck after trying the fix? Email Professor Wang with a screenshot of the full error text (include your name and “MKT 708” in the subject).</div>
+
+  <div class="nav"><a href="index.html">← All weeks</a><a href="how_to_export_pdf.html">How to export to PDF →</a></div>
+</main>
+<footer>MKT 708 · Customer Data Analytics · Summer B 2026</footer>
+</body>
+</html>
